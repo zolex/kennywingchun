@@ -1,0 +1,132 @@
+{#
+ # Homepage template
+ # ---------------
+ #
+ # When this template gets loaded, it will be because someone has accessed
+ # http://yoursite.com/ (without any URI). Craft checks to see if you have
+ # a Single section set to be the Homepage (as you do, by default), and
+ # loads the section’s Template (this file). A special ‘entry’ variable
+ # will already be set for you, assigned to the Homepage entry.
+ #
+ # It's worth noting that even if you didn't have a Homepage Single section,
+ # as long as this template remains at craft/templates/index.html, it
+ # would still be the one to get loaded when accessing http://yoursite.com/,
+ # albeit without an ‘entry’ variable already set for you.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+	<section id="main-slider" class="no-margin">
+        <div class="carousel slide">
+            {% set entries = craft.entries.section('landingpage').order('sliderPosition asc') %}
+
+            <ol class="carousel-indicators">
+            	{% for entry in entries %}
+                	<li data-target="#main-slider" data-slide-to="{{ loop.index0 }}" class="{% if loop.index == 1 %}active{% endif %}"></li>
+                {% endfor %}
+            </ol>
+            <div class="carousel-inner">
+
+
+            	{% for entry in entries %}
+
+	                <div class="item{% if loop.index == 1 %} active{% endif %}" style="background-image: url({{ entry.backgroundImage.first().url }})">
+	                    <div class="container">
+	                        <div class="row slide-margin">
+	                            <div class="col-sm-6">
+	                                <div class="carousel-content">
+	                                    <h1 class="animation animated-item-1">{{ entry.title }}</h1>
+	                                    <div class="bgbox">
+                                            <span class="animation animated-item-2">{{ entry.body }}</span>
+                                        </div>
+	                                </div>
+	                            </div>
+
+	                            <div class="col-sm-6 hidden-xs animation animated-item-4">
+	                                <div class="slider-img">
+	                                    <img src="{{ entry.jumpInImage.first().url }}" class="img-responsive">
+	                                </div>
+	                            </div>
+
+	                        </div>
+	                    </div>
+	                </div><!--/.item-->
+
+                {% endfor %}
+
+
+            </div><!--/.carousel-inner-->
+        </div><!--/.carousel-->
+        <a class="prev hidden-xs" href="#main-slider" data-slide="prev">
+            <i class="fa fa-chevron-left"></i>
+        </a>
+        <a class="next hidden-xs" href="#main-slider" data-slide="next">
+            <i class="fa fa-chevron-right"></i>
+        </a>
+    </section><!--/#main-slider-->
+
+    <section id="feature" >
+        <div class="container">
+           <div class="center wow fadeInDown">
+                <h2>Kenny's Credits</h2>
+            </div>
+
+            <div class="row">
+                <div class="features">
+                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="feature-wrap">
+                            <i class="fa fa-group"></i>
+                            <h2>Chairman</h2>
+                            <h3>Kenny Wing Chun Martial Arts Association-Chairman</h3>
+                        </div>
+                    </div><!--/.col-md-4-->
+
+                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="feature-wrap">
+                            <i class="fa fa-trophy"></i>
+                            <h2>Master</h2>
+                            <h3>Master of the Martial Arts:<br> Ip Man Wing Chun</h3>
+                        </div>
+                    </div><!--/.col-md-4-->
+
+                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="feature-wrap">
+                            <i class="fa fa-bell-o"></i>
+                            <h2>Referee</h2>
+                            <h3>Hong Kong Wing Chun Union Contest Referee</h3>
+                        </div>
+                    </div><!--/.col-md-4-->
+                
+                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="feature-wrap">
+                            <i class="fa fa-magic"></i>
+                            <h2>Honored</h2>
+                            <h3>Bachelor of Science (Psy)</h3>
+                        </div>
+                    </div><!--/.col-md-4-->
+
+                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="feature-wrap">
+                            <i class="fa fa-certificate"></i>
+                            <h2>Commitee</h2>
+                            <h3>Hong Kong Wing Chun Union Committee Member</h3>
+                        </div>
+                    </div><!--/.col-md-4-->
+
+                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="feature-wrap">
+                            <i class="fa fa-lightbulb-o"></i>
+                            <h2>Instructor</h2>
+                            <h3>Ving Tsun Athletic Association Ving Tsun Instructor</h3>
+                        </div>
+                    </div><!--/.col-md-4-->
+                </div><!--/.services-->
+            </div><!--/.row-->    
+        </div><!--/.container-->
+    </section><!--/#feature-->
+
+{% endblock %}

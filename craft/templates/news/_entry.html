@@ -1,0 +1,43 @@
+{#
+ # News entry template
+ # -------------------
+ #
+ # This template gets loaded whenever a News entry’s URL is
+ # requested. That’s because the News section’s Template setting is
+ # set to “news/_entry”, the path to this template.
+ #
+ # When this template is loaded, it will already have an ‘entry’
+ # variable, set to the requested News entry.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+
+{% block content %}
+	<section id="blog" class="container">
+        <div class="blog">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="blog-item">
+                        <img class="img-responsive img-blog" src="{{ entry.headerImage.first().url }}" width="100%" alt="" />
+                        <div class="row">  
+                            <div class="col-xs-12 col-sm-2 text-center">
+                                <div class="entry-meta">
+                                    <span id="publish_date">{{ entry.postDate.format('F d, Y') }}</span>
+                                    <span><i class="fa fa-user"></i> <a href="#">{{ entry.author }}</a></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-10 blog-content">
+                               <h2>{{ entry.title }}</h2>
+                               {{ entry.body }}
+                            </div>
+                        </div>
+                    </div><!--/.blog-item-->
+                </div>
+            </div><!--/.row-->
+         </div><!--/.blog-->
+    </section><!--/#blog-->
+
+{% endblock %}

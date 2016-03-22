@@ -1,0 +1,51 @@
+{#
+ # News index template
+ # -------------------
+ #
+ # This template is loaded whenever http://example.com/news is
+ # requested, because it is located at news/index.html in your
+ # craft/templates/ folder.
+ #
+ # See this page for more details on how Craft routes requests:
+ # http://craftcms.com/docs/routing
+ #}
+
+{% extends "_layout" %}
+{% set title = "News" %}
+
+{% block content %}
+	<section id="blog" class="container">
+        <div class="blog">
+            <div class="row">
+            	 <div class="col-md-2"></div>
+                 <div class="col-md-8">
+					{% for entry in craft.entries.section('news').find() %}
+						<div class="blog-item">
+				            <div class="row">
+								<div class="col-xs-12">
+									<img class="img-responsive img-blog" src="{{ entry.headerImage.first().url }}" width="100%" alt="" />
+								</div>
+							</div>
+				            <div class="row">
+				                <div class="col-xs-12 col-sm-3">
+				                    <div class="entry-meta">
+				                        <span id="publish_date">{{ entry.postDate.format('F d, Y') }}</span>
+				                        <span><i class="fa fa-user"></i> <a href="#">{{ entry.author }}</a></span>
+				                    </div>
+				                </div>
+				                    
+				                <div class="col-xs-6 col-sm-9 blog-content">
+				                    <h2><a href="{{ entry.url }}">{{ entry.title }}</a></h2>
+				                    <h3>{{ entry.body.getPage(1) }}</h3>
+				                    <a class="btn btn-primary readmore" href="{{ entry.url }}">Read More <i class="fa fa-angle-right"></i></a>
+				                </div>
+				            </div>    
+				        </div><!--/.blog-item-->
+
+					{% endfor %}
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
